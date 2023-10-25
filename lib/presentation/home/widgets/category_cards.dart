@@ -11,9 +11,8 @@ import '../../../injection.dart';
 import '../../core/category_page.dart';
 
 class Cards extends StatelessWidget {
-  Cards({required this.category});
-
   final MyCategory category;
+  Cards({required this.category});
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +20,7 @@ class Cards extends StatelessWidget {
       create: (BuildContext context)  => CategoryProductsCubit(name: category.name),
       child: GestureDetector(
         onTap: () {
-          print(
-              '1gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg');
+          print('1ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg');
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -31,8 +29,7 @@ class Cards extends StatelessWidget {
               ),
             ),
           );
-          print(
-              '2gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg');
+          print('2gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg');
         },
         child: Padding(
           padding: const EdgeInsets.all(5.0),

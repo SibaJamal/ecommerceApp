@@ -39,15 +39,20 @@ class ProductsRepository {
   }
 
   Future<Either<FetchDataFailure,List<dynamic>>> getCategoryProducts(String filter) async {
-    getCategories();
     NetworkHelper helper;
     List<dynamic> products = [];
+    List<dynamic> categoryProducts = [];
     try {
-      helper = NetworkHelper('$url/categories/$filter');
+      helper = NetworkHelper('$url/products');
       var info = await helper.fetchData();
       var list = info['data'];
       products = list.map((element) => Product.fromJson(element)).toList();
-      return right(products);
+      for (int i=0;i<products.length;i++){
+        if (products[i].category == filter){
+          categoryProducts.add(products[i]);
+        }
+      }
+      return right(categoryProducts);
     } on FetchDataFailure catch (_){
       return left(const FetchDataFailure.connection());
     }

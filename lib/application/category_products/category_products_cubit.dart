@@ -11,7 +11,6 @@ import '../../infrastructure/products/products_data_repository.dart';
 part 'category_products_state.dart';
 part 'category_products_cubit.freezed.dart';
 
-
 class CategoryProductsCubit extends Cubit<CategoryProductsState> {
   String name;
   late ProductsRepository productsRepository;
