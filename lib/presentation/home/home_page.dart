@@ -1,4 +1,5 @@
-import 'package:e_commerce/application/cart/cart_bloc.dart';
+
+import 'package:auto_route/auto_route.dart';
 import 'package:e_commerce/application/category/category_cubit.dart';
 import 'package:e_commerce/application/products/products_cubit.dart';
 import 'package:e_commerce/presentation/home/widgets/category_cards.dart';
@@ -8,6 +9,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 import 'package:e_commerce/constants.dart';
 
+import '../../application/cart/cart_bloc.dart';
+
+@RoutePage()
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -56,7 +60,16 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Padding(
+      child: BlocListener<CartBloc, CartState>(
+        listener: (context, state) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              backgroundColor: primaryColor,
+              content: Text('added to your cart',style: TextStyle(color: Colors.white),),
+            ),
+          );
+        },
+  child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -205,6 +218,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+),
     );
   }
 }

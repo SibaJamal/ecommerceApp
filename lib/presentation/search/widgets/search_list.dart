@@ -1,8 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:e_commerce/constants.dart';
 import 'package:flutter/material.dart';
 
 import '../../../domain/products/product.dart';
 import '../../core/product_page.dart';
+import '../../routs/router.gr.dart';
 
 class SearchList extends StatelessWidget {
   final Product product;
@@ -14,12 +16,7 @@ class SearchList extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
         onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => ProductPage(
-                        product: product,
-                      )));
+          context.router.push(ProductRoute(product:product));
         },
         child: SizedBox(
           height: 150,

@@ -4,11 +4,11 @@ part of 'cart_bloc.dart';
 @freezed
 class CartState with _$CartState {
   const factory CartState({
-    required List<dynamic> items,
+    required final Cart cart,
   }) = _CartState;
 
   factory CartState.initialState() => const CartState(
-        items: [],
+        cart: Cart(items: []),
       );
 }
 

@@ -1,14 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:e_commerce/application/category_products/category_products_cubit.dart';
 import 'package:e_commerce/constants.dart';
+import 'package:e_commerce/presentation/routs/router.gr.dart';
 import 'package:flutter/cupertino.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../application/category/category_cubit.dart';
 import '../../../domain/core/category.dart';
-import '../../../injection.dart';
-import '../../core/category_page.dart';
 
 class Cards extends StatelessWidget {
   final MyCategory category;
@@ -20,16 +17,7 @@ class Cards extends StatelessWidget {
       create: (BuildContext context)  => CategoryProductsCubit(name: category.name),
       child: GestureDetector(
         onTap: () {
-          print('1ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg');
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => CategoryPage(
-                category: category,
-              ),
-            ),
-          );
-          print('2gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg');
+          context.router.push(CategoryRoute(category:category));
         },
         child: Padding(
           padding: const EdgeInsets.all(5.0),

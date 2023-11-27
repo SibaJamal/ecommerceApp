@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:e_commerce/constants.dart';
 import 'package:e_commerce/presentation/auth/sign_up_page.dart';
 import 'package:e_commerce/presentation/core/main_page.dart';
+import 'package:e_commerce/presentation/routs/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -84,6 +86,7 @@ class SignInForm extends StatelessWidget {
                   // style: ElevatedButton.styleFrom(
                   //   minimumSize: const Size(400, 60),
                   // ),
+                  ///todo : fix this router
                   onPressed: () async {
                     // context
                     //     .read<SignInFormBloc>()
@@ -175,10 +178,7 @@ class SignInForm extends StatelessWidget {
                     ),
                     GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const SignUpPage()));
+                          context.router.push(const SignUpRoute());
                         },
                         child: const Text("Register",
                             style: TextStyle(

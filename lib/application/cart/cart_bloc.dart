@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:meta/meta.dart';
+import '../../domain/cart/cart.dart';
 import '../../domain/products/product.dart';
 import '../../infrastructure/cart/cart_repository.dart';
 import 'package:injectable/injectable.dart';
@@ -10,20 +11,17 @@ part 'cart_bloc.freezed.dart';
 
 @injectable
 class CartBloc extends Bloc<CartEvent, CartState> {
-  CartRepository cartRepository;
 
-  CartBloc(this.cartRepository) : super(CartState.initialState()) {
+  CartBloc() : super(CartState.initialState()) {
     on<CartEvent>((event, emit) async {
-      if (event is AddToCart) {
-        List<Product> items = List<Product>.from(state.items);
-        items.add(event.product);
-        emit(CartState(items: items));
-      }
-      if (event is RemoveFromCart) {
-        List<Product> items = List<Product>.from(state.items);
-        items.add(event.product);
-        emit(CartState(items: items));
-      }
+     event.map(
+        addToCart: (event){
+          emit(CartState(cart: Cart(items: List.from(state.cart.items)..add(event.product))));
+        },
+        removeFromCart: (event){
+          emit(CartState(cart: Cart(items: List.from(state.cart.items)..remove(event.product))));
+        },
+    );
     });
     // on<AddToCart>(_addTo);
     // on<RemoveFromCart>(_removeFrom);

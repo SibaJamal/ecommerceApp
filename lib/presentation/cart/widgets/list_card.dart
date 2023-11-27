@@ -1,22 +1,17 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:e_commerce/application/cart/cart_bloc.dart';
+import 'package:e_commerce/presentation/routs/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../application/counter_cubit.dart';
 import '../../../constants.dart';
 import '../../../domain/products/product.dart';
 import '../../core/product_page.dart';
 
-class ListCard extends StatefulWidget {
+class ListCard extends StatelessWidget {
   final Product product;
-  const ListCard({Key? key, required this.product}) : super(key: key);
+  final int quantity;
+  const ListCard({Key? key, required this.product, required this.quantity}) : super(key: key);
 
-  @override
-  State<ListCard> createState() => _ListCardState();
-}
-
-class _ListCardState extends State<ListCard> {
-  int _num = 1;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -28,22 +23,17 @@ class _ListCardState extends State<ListCard> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ProductPage(
-                                  product: widget.product,
-                                )));
+                    context.router.push(ProductRoute(product:product));
 
                     ///todo make it only on image
                   },
                   child: SizedBox(
-                    width: 100,
+                    width: MediaQuery.of(context).size.width*0.3,
                     child: Container(
                       decoration: BoxDecoration(
                           border: Border.all(color: secondaryColor)),
@@ -54,72 +44,71 @@ class _ListCardState extends State<ListCard> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  width: 3,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ProductPage(
-                                      product: widget.product,
-                                    )));
-                      },
-                      child: SizedBox(
-                        width: 100,
+                SizedBox(
+                  width: MediaQuery.of(context).size.width*0.3,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ProductPage(
+                                        product: product,
+                                      )));
+                        },
                         child: Text(
-                          widget.product.title,
+                          product.title,
                           style: const TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold),
                           overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
+                          maxLines: 2,
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 50),
-                    GestureDetector(
-                      child: const Icon(Icons.delete),
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: Text(widget.product.title),
-                              content: const Text(
-                                  "do you want to remove this item from your cart?"),
-                              actions: [
-                                TextButton(
-                                  child: const Text("yes"),
-                                  onPressed: () {
-                                    BlocProvider.of<CartBloc>(context).add(
-                                        AddToCart(product: widget.product));
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                                TextButton(
-                                  child: const Text("Cancel"),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      },
-                    ),
-                  ],
+                      const SizedBox(height: 25),
+                      GestureDetector(
+                        child: const Icon(Icons.delete),
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text(product.title),
+                                content: const Text(
+                                    "do you want to remove this item from your cart?"),
+                                actions: [
+                                  TextButton(
+                                    child: const Text("yes"),
+                                    onPressed: () {
+                                      BlocProvider.of<CartBloc>(context).add(
+                                         CartEvent.addToCart(product: product));
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                  TextButton(
+                                    child: const Text("Cancel"),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-                const SizedBox(width: 50),
+                //  SizedBox(
+                //   width: MediaQuery.of(context).size.width*0.01,
+                // ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "${widget.product.price}\$",
+                      "${product.price}\$",
                       style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -131,18 +120,14 @@ class _ListCardState extends State<ListCard> {
                         GestureDetector(
                           child: const Icon(Icons.add),
                           onTap: () {
-                            setState(() {
-                              _num++;
-                              BlocProvider.of<CounterCubit>(context)
-                                  .increment(widget.product.price.toString());
-                            });
+                              BlocProvider.of<CartBloc>(context).add(CartEvent.addToCart(product: product));
                           },
                         ),
-                        Container(
+                        SizedBox(
                           width: 50,
                           child: Center(
                               child: Text(
-                            _num.toString(),
+                           quantity.toString(),
                             style: const TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           )),
@@ -150,11 +135,7 @@ class _ListCardState extends State<ListCard> {
                         GestureDetector(
                           child: const Icon(Icons.remove),
                           onTap: () {
-                            BlocProvider.of<CounterCubit>(context)
-                                .decrement(widget.product.price.toString());
-                            setState(() {
-                              _num--;
-                            });
+                            BlocProvider.of<CartBloc>(context).add(CartEvent.removeFromCart(product: product));
                           },
                         ),
                       ],

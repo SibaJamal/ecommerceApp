@@ -1,14 +1,14 @@
+import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:e_commerce/application/category_products/category_products_cubit.dart';
 import 'package:e_commerce/domain/core/category.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../application/products/products_cubit.dart';
 import '../../constants.dart';
-import '../../injection.dart';
 import '../home/widgets/grid_card.dart';
 
+@RoutePage()
 class CategoryPage extends StatelessWidget {
   MyCategory category;
   CategoryPage({required this.category});
@@ -21,10 +21,10 @@ class CategoryPage extends StatelessWidget {
         appBar: AppBar(
           leading: GestureDetector(
             onTap: () {
-              Navigator.pop(context);
+              context.popRoute();
             },
             child: const Icon(
-              Icons.arrow_back_ios_new,
+              Icons.arrow_back,
               color: primaryColor,
             ),
           ),
@@ -47,7 +47,6 @@ class CategoryPage extends StatelessWidget {
                     height: 250,
                     child: Center(child: CircularProgressIndicator())),
                 categoryLoaded: (state) {
-                  print("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHhh787878");
                   return SizedBox(
                       height: MediaQuery.of(context).size.height * 0.9,
                       child: GridView.builder(

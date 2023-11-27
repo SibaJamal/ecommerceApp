@@ -1,9 +1,11 @@
+import 'package:auto_route/annotations.dart';
 import 'package:e_commerce/application/search/search_bloc.dart';
 import 'package:e_commerce/constants.dart';
 import 'package:e_commerce/presentation/search/widgets/search_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+@RoutePage()
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
 
@@ -109,10 +111,10 @@ class _SearchPageState extends State<SearchPage> {
                   },
                   builder: (context, state) {
                     return state.map(
-                      initial: (_) => Column(
+                      initial: (_) => const Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        children: const [
+                        children: [
                           Icon(
                             Icons.search,
                             size: 100,

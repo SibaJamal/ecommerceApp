@@ -5,5 +5,5 @@ import 'injection.dart';
 
 void main() {
   configureDependencies();
-  runApp(const AppWidget());
+  runApp(AppWidget());
 }

@@ -8,10 +8,10 @@ class User {
 
   User({required id, required name, required email, required password});
   User.fromJson(Map<String, dynamic> json) {
-    id = json['data']['user']['id'];
-    name = json['data']['user']['attributes']['name'];
-    email = json['data']['user']['attributes']['email'];
-    image = json['data']['user']['relationships']['image'];
-    image = json['data']['user']['relationships']['balance'];
+    id = json['data']['id'];
+    name = json['data']['name'];
+    email = json['data']['email'];
+    // image = json['data']['user']['relationships']['image'];
+    // image = json['data']['user']['relationships']['balance'];
   }
 }

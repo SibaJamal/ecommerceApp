@@ -6,6 +6,7 @@ class SignInFormState with _$SignInFormState {
   const factory SignInFormState({
     required EmailAddress emailAddress,
     required Password password,
+    required Password confirm,
     required String name,
     required bool showErrorMessages,
     required bool isSubmitting,
@@ -15,6 +16,7 @@ class SignInFormState with _$SignInFormState {
   factory SignInFormState.initialState() => SignInFormState(
         emailAddress: EmailAddress(''),
         password: Password(''),
+        confirm: Password(''),
         name: '',
         showErrorMessages: false,
         isSubmitting: false,

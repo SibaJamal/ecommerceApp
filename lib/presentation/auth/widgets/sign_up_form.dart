@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:e_commerce/application/auth/sign_in_form/sign_in_form_bloc.dart';
+import 'package:e_commerce/presentation/routs/router.gr.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,7 +25,7 @@ class _SignUpFormState extends State<SignUpForm> {
       builder: (context, state) {
         return Form(
           autovalidateMode: state.showErrorMessages
-              ? AutovalidateMode.onUserInteraction
+              ? AutovalidateMode.always
               : AutovalidateMode.disabled,
           child: Padding(
             padding: const EdgeInsets.all(30.0),
@@ -45,12 +47,13 @@ class _SignUpFormState extends State<SignUpForm> {
                   onChanged: (value) {
                     BlocProvider.of<SignInFormBloc>(context)
                         .add(SignInFormEvent.nameChanged(value));
+                    print(value);
+                    print('PPPPP');
                   },
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your name';
                     }
-                    return null;
                   },
                   style: const TextStyle(
                     color: textGray,
@@ -70,6 +73,7 @@ class _SignUpFormState extends State<SignUpForm> {
                     BlocProvider.of<SignInFormBloc>(context)
                         .add(SignInFormEvent.emailChanged(value));
                   },
+                  /// rrr
                   validator: (_) => context
                       .read<SignInFormBloc>()
                       .state
@@ -78,7 +82,7 @@ class _SignUpFormState extends State<SignUpForm> {
                       .fold(
                           (l) => l.maybeMap(
                                 invalidEmailAddress: (_) =>
-                                    ' Invalid email address',
+                                    'Invalid email address',
                                 orElse: () => 'RR',
                               ),
                           (r) => null),
@@ -125,7 +129,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 TextFormField(
                   onChanged: (value) {
                     BlocProvider.of<SignInFormBloc>(context)
-                        .add(SignInFormEvent.passwordChanged(value));
+                        .add(SignInFormEvent.confirmPasswordChanged(value));
                   },
                   validator: (value) {
                     final String passwordValue =
@@ -135,7 +139,7 @@ class _SignUpFormState extends State<SignUpForm> {
                     } else if (value != passwordValue) {
                       print(state.password.toString());
                       print(value);
-                      return '${passwordValue} identical $value';
+                      return 'not identical';
                     }
                     return null;
                   },
@@ -160,11 +164,6 @@ class _SignUpFormState extends State<SignUpForm> {
                   onPressed: () async {
                     BlocProvider.of<SignInFormBloc>(context)
                         .add(const SignInFormEvent.signUpPressed());
-
-                    // Navigator.pushReplacement(
-                    //   context,
-                    //   MaterialPageRoute(builder: (context) => const MainPage()),
-                    // );
                   },
                   child: const Text(
                     'Sign Up',
@@ -184,6 +183,9 @@ class _SignUpFormState extends State<SignUpForm> {
                       height: 16,
                     ),
                     GestureDetector(
+                      onTap: (){
+                        context.router.push(const SignInRoute());
+                      },
                         child: const Text("Sign In",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,

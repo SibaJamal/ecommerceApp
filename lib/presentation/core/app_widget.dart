@@ -6,16 +6,14 @@ import 'package:e_commerce/application/my_products/my_products_cubit.dart';
 import 'package:e_commerce/application/products/products_cubit.dart';
 import 'package:e_commerce/application/search/search_bloc.dart';
 import 'package:e_commerce/injection.dart';
-import 'package:e_commerce/presentation/auth/sign_in_page.dart';
-import 'package:e_commerce/presentation/core/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../application/category_products/category_products_cubit.dart';
-import '../../application/counter_cubit.dart';
 import '../../constants.dart';
+import '../routs/router.dart';
 
 class AppWidget extends StatefulWidget {
-  const AppWidget({super.key});
+  final _appRouter = AppRouter();
+   AppWidget({super.key});
 
   @override
   State<AppWidget> createState() => _AppWidgetState();
@@ -26,9 +24,6 @@ class _AppWidgetState extends State<AppWidget> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => getIt<CounterCubit>(),
-        ),
         BlocProvider(
           create: (context) => getIt<ProductsCubit>(),
         ),
@@ -43,8 +38,7 @@ class _AppWidgetState extends State<AppWidget> {
           create: (context) => getIt<MyProductsCubit>(),
         ),
         BlocProvider(
-          lazy: true,
-          create: (context) => getIt<AuthBloc>(),
+          create: (context) => getIt<AuthBloc>()..add(const AuthEvent.authCheckedRequested()),
         ),
         BlocProvider(
           lazy: true,
@@ -53,14 +47,12 @@ class _AppWidgetState extends State<AppWidget> {
         BlocProvider(
           create: (context) => getIt<CategoryCubit>(),
         ),
-        // BlocProvider(
-        //   create: (context) => getIt<CategoryProductsCubit>(),
-        // )
       ],
-      child: MaterialApp(
+      child: MaterialApp.router(
+        routerDelegate: widget._appRouter.delegate(),
+        routeInformationParser: widget._appRouter.defaultRouteParser(),
         title: 'Notes',
         debugShowCheckedModeBanner: false,
-        home: const MainPage(),
         theme: ThemeData(
           iconTheme: const IconThemeData(
             color: Colors.black,

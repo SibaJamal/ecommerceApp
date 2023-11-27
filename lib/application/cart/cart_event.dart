@@ -1,14 +1,8 @@
 part of 'cart_bloc.dart';
 
-@immutable
-abstract class CartEvent {}
 
-class AddToCart extends CartEvent {
-  Product product;
-  AddToCart({required this.product});
-}
-
-class RemoveFromCart extends CartEvent {
-  Product product;
-  RemoveFromCart({required this.product});
+@freezed
+class CartEvent with _$CartEvent {
+  const factory CartEvent.addToCart({required Product product}) = _AddToCart;
+  const factory CartEvent.removeFromCart({required Product product}) = _RemoveFromCart;
 }

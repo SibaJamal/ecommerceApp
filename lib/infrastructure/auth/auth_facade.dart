@@ -26,10 +26,10 @@ class AuthFacade implements IAuthFacade {
       print(
           "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!@@@@");
       await authenticationHelper.signUp(
+        name: name,
         email: emailStr,
         password: passwordStr,
         confirmPassword: confirmPasswordStr,
-        name: name,
       );
       print(
           "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!@@@@");

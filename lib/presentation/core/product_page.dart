@@ -1,3 +1,5 @@
+import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:e_commerce/constants.dart';
 import 'package:e_commerce/presentation/core/widgets/title_widget.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +9,7 @@ import 'package:intl/intl.dart';
 import '../../application/cart/cart_bloc.dart';
 import '../../domain/products/product.dart';
 
+@RoutePage()
 class ProductPage extends StatelessWidget {
   final Product product;
 
@@ -22,7 +25,7 @@ class ProductPage extends StatelessWidget {
         backgroundColor: Colors.white,
         leading: GestureDetector(
           onTap: () {
-            Navigator.pop(context);
+            context.popRoute();
           },
           child: const Icon(Icons.arrow_back,color: primaryColor,),
         ),
@@ -32,7 +35,8 @@ class ProductPage extends StatelessWidget {
         listener: (context, state) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('updated your cart'),
+              backgroundColor: primaryColor,
+              content: Text('added to your cart',style: TextStyle(color: Colors.white),),
             ),
           );
         },
@@ -69,8 +73,7 @@ class ProductPage extends StatelessWidget {
                           ),
                         ),
                         onTap: () {
-                          BlocProvider.of<CartBloc>(context)
-                              .add(AddToCart(product: product));
+                          BlocProvider.of<CartBloc>(context).add(CartEvent.addToCart(product: product));
                         },
                       ),
                     ],

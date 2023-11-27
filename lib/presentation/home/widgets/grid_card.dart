@@ -1,10 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:e_commerce/constants.dart';
 import 'package:e_commerce/domain/products/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../application/cart/cart_bloc.dart';
-import '../../core/product_page.dart';
+import '../../routs/router.gr.dart';
+
 
 class GridCard extends StatelessWidget {
   final Product product;
@@ -28,12 +29,7 @@ class GridCard extends StatelessWidget {
                       border: Border.all(color: secondaryColor)),
                   child: GestureDetector(
                     onTap: (){
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ProductPage(
-                                product: product,
-                              )));
+                      context.router.push(ProductRoute(product:product));
                     },
                     child: const Image(
                         height: 150,
@@ -78,8 +74,7 @@ class GridCard extends StatelessWidget {
                                   color: primaryColor,
                                 ),
                                 onTap: () {
-                                  BlocProvider.of<CartBloc>(context)
-                                      .add(AddToCart(product: product));
+                                  BlocProvider.of<CartBloc>(context).add(CartEvent.addToCart(product: product));
                                 },
                               ),
                             ],

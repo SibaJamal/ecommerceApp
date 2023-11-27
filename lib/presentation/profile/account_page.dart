@@ -4,7 +4,9 @@ import 'package:e_commerce/presentation/profile/product_details.dart';
 import 'package:e_commerce/presentation/profile/widgets/my_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:auto_route/auto_route.dart';
 
+@RoutePage()
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
 

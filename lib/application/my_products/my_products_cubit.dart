@@ -15,12 +15,12 @@ class MyProductsCubit extends Cubit<MyProductsState> {
     getMyProduct;
   }
   void getMyProduct() async {
-    List<dynamic> ss = await authenticationHelper.getUserPosts();
-    emit(MyProductsState.productLoaded(allMyData: ss));
-    if (ss == []) {
-      emit(const MyProductsState.empty());
-    } else {
-      emit(MyProductsState.productLoaded(allMyData: ss));
-    }
+    // List<dynamic> ss = await authenticationHelper.getUserPosts();
+    // emit(MyProductsState.productLoaded(allMyData: ss));
+    // if (ss == []) {
+    //   emit(const MyProductsState.empty());
+    // } else {
+    //   emit(MyProductsState.productLoaded(allMyData: ss));
+    // }
   }
 }

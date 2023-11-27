@@ -6,13 +6,11 @@ import 'package:injectable/injectable.dart';
 @singleton
 class SearchRepository {
   Future<List<dynamic>> searchProducts(
-      {required String searchValue, String filter = 'all'}) async {
+      {required String searchValue,}) async {
     NetworkHelper helper;
     List<dynamic> products;
 
-    helper = (filter == "all")
-        ? NetworkHelper('$url/products/$searchValue')
-        : NetworkHelper('$url/products/$filter/$searchValue');
+    helper = NetworkHelper('$url/products/$searchValue');
     var info = await helper.fetchData();
     print('lllllllllllllllllllllllllllllllllllllllll');
     print(info);
