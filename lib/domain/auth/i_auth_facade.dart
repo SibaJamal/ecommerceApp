@@ -1,8 +1,8 @@
 import 'package:e_commerce/domain/auth/auth_failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:e_commerce/domain/auth/value_objects.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-import '../core/User.dart';
 
 abstract class IAuthFacade {
   Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword(
@@ -19,6 +19,6 @@ abstract class IAuthFacade {
   Future<Option<User>> getSignedInUser();
 
   Future<void> signOut();
-  // Future<Either<AuthFailure,Unit>> signInWithGoogle ();
-  /// implement sign in with google
+  Future<Either<AuthFailure,Unit>> signInWithGoogle ();
+
 }

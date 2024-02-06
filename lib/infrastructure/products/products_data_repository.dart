@@ -15,8 +15,7 @@ class ProductsRepository {
     List<dynamic> products = [];
     try{
       helper = NetworkHelper('$url/products');
-      var info = await helper.fetchData();
-      var list = info['data'];
+      var list = await helper.fetchData();
       products = list.map((element) => Product.fromJson(element)).toList();
       return right(products);
     }  on FetchDataFailure catch (_) {
@@ -40,19 +39,13 @@ class ProductsRepository {
 
   Future<Either<FetchDataFailure,List<dynamic>>> getCategoryProducts(String filter) async {
     NetworkHelper helper;
-    List<dynamic> products = [];
-    List<dynamic> categoryProducts = [];
+    List<dynamic> products;
     try {
-      helper = NetworkHelper('$url/products');
+      helper = NetworkHelper('$url/products/category/$filter');
       var info = await helper.fetchData();
       var list = info['data'];
       products = list.map((element) => Product.fromJson(element)).toList();
-      for (int i=0;i<products.length;i++){
-        if (products[i].category == filter){
-          categoryProducts.add(products[i]);
-        }
-      }
-      return right(categoryProducts);
+      return right(products);
     } on FetchDataFailure catch (_){
       return left(const FetchDataFailure.connection());
     }

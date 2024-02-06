@@ -1,5 +1,4 @@
-import 'package:e_commerce/domain/products/product.dart';
-import 'package:e_commerce/infrastructure/auth/authentication_data_provider.dart';
+
 import 'package:injectable/injectable.dart';
 
 @singleton

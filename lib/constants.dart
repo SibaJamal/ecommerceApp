@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-const String url = 'https://api.storerestapi.com';
+const String url = 'https://fakestoreapi.com';
 
 const String appName = "MyStore";
 const primaryColor = Color(0xFF2596be);

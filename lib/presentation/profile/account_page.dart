@@ -56,11 +56,11 @@ class ProfilePage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            state.user.name,
+                            state.user.displayName!,
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            state.user.email,
+                            state.user.email!,
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ],

@@ -3,7 +3,6 @@ import 'package:dartz/dartz.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get_it/get_it.dart';
-import 'package:injectable/injectable.dart';
 
 import '../../domain/products/fetch_data_failure.dart';
 import '../../infrastructure/products/products_data_repository.dart';

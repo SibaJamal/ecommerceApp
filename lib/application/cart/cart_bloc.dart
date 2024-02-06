@@ -3,7 +3,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:meta/meta.dart';
 import '../../domain/cart/cart.dart';
 import '../../domain/products/product.dart';
-import '../../infrastructure/cart/cart_repository.dart';
 import 'package:injectable/injectable.dart';
 part 'cart_event.dart';
 part 'cart_state.dart';

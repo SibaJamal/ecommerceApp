@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:e_commerce/constants.dart';
-import 'package:e_commerce/presentation/auth/sign_up_page.dart';
 import 'package:e_commerce/presentation/core/main_page.dart';
 import 'package:e_commerce/presentation/routs/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +26,6 @@ class SignInForm extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // const Text('Sign In to continue',style: TextStyle(fontSize:20),),
                 const SizedBox(
                   height: 70,
                 ),
@@ -49,13 +47,14 @@ class SignInForm extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                   decoration: const InputDecoration(
+                    focusColor: primaryColor,
                     prefixIcon: Icon(Icons.email),
                     hintText: "your Email",
                   ),
                   keyboardType: TextInputType.emailAddress,
                 ),
-                const SizedBox(
-                  height: 8,
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.01,
                 ),
                 TextFormField(
                   onChanged: (value) {
@@ -78,19 +77,14 @@ class SignInForm extends StatelessWidget {
                     hintText: 'Password',
                   ),
                   keyboardType: TextInputType.text,
+                  obscureText: true,
                 ),
                 const SizedBox(
                   height: 16,
                 ),
                 ElevatedButton(
-                  // style: ElevatedButton.styleFrom(
-                  //   minimumSize: const Size(400, 60),
-                  // ),
                   ///todo : fix this router
                   onPressed: () async {
-                    // context
-                    //     .read<SignInFormBloc>()
-                    //     .add(const SignInFormEvent.signInPressed());
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(builder: (context) => const MainPage()),
@@ -98,63 +92,9 @@ class SignInForm extends StatelessWidget {
                   },
                   child: const Text(
                     'Sign In',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(fontWeight: FontWeight.bold,color: primaryColor),
                   ),
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.all(16.0),
-                //   child: Row(
-                //       crossAxisAlignment: CrossAxisAlignment.center,
-                //       mainAxisAlignment: MainAxisAlignment.center,
-                //       children: const [
-                //         Expanded(
-                //           child: Divider(
-                //             color: secondaryColor,
-                //             thickness: 2,
-                //             endIndent: 10,
-                //           ),
-                //         ),
-                //         Center(
-                //             child: Text(
-                //           'OR',
-                //           style: TextStyle(
-                //               fontWeight: FontWeight.bold, color: textGray),
-                //         )),
-                //         Expanded(
-                //           child: Divider(
-                //             color: secondaryColor,
-                //             thickness: 2,
-                //             indent: 10,
-                //           ),
-                //         ),
-                //       ]),
-                // ),
-                // Container(
-                //   width: 400,
-                //   height: 60,
-                //   decoration: BoxDecoration(
-                //     borderRadius: const BorderRadius.all(Radius.circular(5)),
-                //     border: Border.all(color: textGray),
-                //   ),
-                //   child: Padding(
-                //     padding: const EdgeInsets.all(16.0),
-                //     child: Row(
-                //       mainAxisAlignment: MainAxisAlignment.start,
-                //       children: const [
-                //         ///Todo add the logo
-                //         // ImageIcon(),
-                //         SizedBox(
-                //           width: 60,
-                //         ),
-                //         Text(
-                //           "Sign In with google",
-                //           style: TextStyle(
-                //               fontWeight: FontWeight.bold, color: textGray),
-                //         ),
-                //       ],
-                //     ),
-                //   ),
-                // ),
                 const SizedBox(
                   height: 200,
                 ),
