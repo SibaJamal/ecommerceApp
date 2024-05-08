@@ -1,4 +1,3 @@
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:e_commerce/constants.dart';
 import 'package:e_commerce/presentation/core/widgets/title_widget.dart';
@@ -13,7 +12,7 @@ import '../../domain/products/product.dart';
 class ProductPage extends StatelessWidget {
   final Product product;
 
-  ProductPage({
+  const ProductPage({
     Key? key,
     required this.product,
   }) : super(key: key);
@@ -47,7 +46,7 @@ class ProductPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Image(image: AssetImage('images/ss.jpg')),
+                Image(image: NetworkImage(product.imageUrl)),
                 SizedBox(
                   height: 60,
                   child: Row(
@@ -100,15 +99,15 @@ class ProductPage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text(
-                      ///delete this
-                      DateFormat('yyyy-MM-dd – kk:mm')
-                          .format(DateTime.parse(product.createdAt)),
-                      style: const TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                          color: textGray),
-                    ),
+                    // Text(
+                    //   ///delete this
+                    //   DateFormat('yyyy-MM-dd – kk:mm')
+                    //       .format(DateTime.parse(product.createdAt)),
+                    //   style: const TextStyle(
+                    //       fontSize: 12,
+                    //       fontWeight: FontWeight.w400,
+                    //       color: textGray),
+                    // ),
                   ],
                 ),
                 MyTitle(text: "Available Quantity: ${product.quantity}"),

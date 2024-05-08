@@ -1,8 +1,5 @@
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:e_commerce/application/category_products/category_products_cubit.dart';
-import 'package:e_commerce/domain/core/category.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../constants.dart';
@@ -10,13 +7,13 @@ import '../home/widgets/grid_card.dart';
 
 @RoutePage()
 class CategoryPage extends StatelessWidget {
-  MyCategory category;
-  CategoryPage({required this.category});
+  String category;
+  CategoryPage({super.key, required this.category});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CategoryProductsCubit(name: category.slug),
+      create: (context) => CategoryProductsCubit(name: category),
       child: Scaffold(
         appBar: AppBar(
           leading: GestureDetector(
@@ -32,7 +29,7 @@ class CategoryPage extends StatelessWidget {
           title: Padding(
             padding: const EdgeInsets.all(90.0),
             child: Text(
-              category.name,
+              category,
               style: const TextStyle(color: primaryColor),
             ),
           ),

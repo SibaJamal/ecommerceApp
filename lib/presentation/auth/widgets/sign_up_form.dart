@@ -1,10 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:e_commerce/application/auth/sign_in_form/sign_in_form_bloc.dart';
 import 'package:e_commerce/presentation/routs/router.gr.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import '../../../application/auth/auth_bloc.dart';
 import '../../../constants.dart';
 
 
@@ -20,7 +19,30 @@ class _SignUpFormState extends State<SignUpForm> {
   Widget build(BuildContext context) {
     return BlocConsumer<SignInFormBloc, SignInFormState>(
       listener: (context, state) {
-        // TODO: implement listener
+        state.authFailureOrSuccessOption.fold(
+              () {},
+              (either) => either.fold(
+                (failure) {
+                  ///fix this
+              // FlushbarHelper.createError(
+              //   message: failure.map(
+              //     cancelledByUser: (_) => 'Cancelled',
+              //     serverError: (_) => 'Server error',
+              //     emailAlreadyInUse: (_) => 'Email already in use',
+              //     invalidEmailAndPasswordCombination: (_) =>
+              //     'Invalid email and password combination',
+              //   ),
+              // ).show(context);
+            },
+                (_) {
+                  context.router.replace(const MainRoute());
+                  BlocProvider.of<AuthBloc>(context)
+                      .add(const AuthEvent.authCheckedRequested());
+                  BlocProvider.of<SignInFormBloc>(context)
+                      .add(const SignInFormEvent.signUpPressed());
+            },
+          ),
+        );
       },
       builder: (context, state) {
         return Form(
@@ -54,6 +76,7 @@ class _SignUpFormState extends State<SignUpForm> {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your name';
                     }
+                    return null;
                   },
                   style: const TextStyle(
                     color: textGray,

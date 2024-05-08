@@ -59,7 +59,6 @@ class AuthFacade implements IAuthFacade {
     }
   }
 
-
   @override
   Future<void> signOut() =>
   Future.wait([
@@ -69,7 +68,7 @@ class AuthFacade implements IAuthFacade {
 
   @override
   Future<Option<User>> getSignedInUser() async {
-    final user = _firebaseAuth.currentUser!;
+    final user = _firebaseAuth.currentUser;
     return optionOf(user);
   }
 

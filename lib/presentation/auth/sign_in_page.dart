@@ -30,7 +30,7 @@ class SignInPage extends StatelessWidget {
                 ],
               ),
             ),
-            SignInForm(),
+            const SignInForm(),
           ],
         ),
       )),

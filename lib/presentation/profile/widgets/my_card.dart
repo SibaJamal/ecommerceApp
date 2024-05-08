@@ -1,5 +1,4 @@
 import 'package:e_commerce/domain/products/product.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
@@ -28,10 +27,10 @@ class MyCard extends StatelessWidget {
               child: Container(
                 decoration:
                     BoxDecoration(border: Border.all(color: secondaryColor)),
-                child: const Image(
+                child: Image(
                     height: 100,
                     width: 100,
-                    image: AssetImage('images/ss.jpg')),
+                    image: NetworkImage(product.imageUrl)),
               ),
             ),
             Padding(

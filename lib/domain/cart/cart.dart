@@ -13,7 +13,7 @@ class Cart extends Equatable{
  }
 
   Map productQuantity (items){
-      Map quantity = Map();
+      Map quantity = {};
      items.forEach((item){
        if(!quantity.containsKey(item)){
          quantity[item] = 1;

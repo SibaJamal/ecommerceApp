@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:meta/meta.dart';
 import '../../domain/cart/cart.dart';
 import '../../domain/products/product.dart';
 import 'package:injectable/injectable.dart';

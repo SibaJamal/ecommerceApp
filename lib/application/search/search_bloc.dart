@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 import '../../infrastructure/search/search_repository.dart';
 import 'package:injectable/injectable.dart';
 

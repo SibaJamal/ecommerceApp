@@ -3,7 +3,6 @@ import 'package:e_commerce/constants.dart';
 import 'package:flutter/material.dart';
 
 import '../../../domain/products/product.dart';
-import '../../core/product_page.dart';
 import '../../routs/router.gr.dart';
 
 class SearchList extends StatelessWidget {

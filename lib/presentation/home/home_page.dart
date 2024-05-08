@@ -1,5 +1,6 @@
 
 import 'package:auto_route/auto_route.dart';
+import 'package:e_commerce/application/auth/auth_bloc.dart';
 import 'package:e_commerce/application/category/category_cubit.dart';
 import 'package:e_commerce/application/products/products_cubit.dart';
 import 'package:e_commerce/presentation/home/widgets/category_cards.dart';
@@ -64,6 +65,7 @@ class _HomePageState extends State<HomePage> {
         listener: (context, state) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
+              duration: Duration(microseconds: 2000),
               backgroundColor: primaryColor,
               content: Text('added to your cart',style: TextStyle(color: Colors.white),),
             ),
@@ -75,6 +77,16 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            BlocBuilder<AuthBloc, AuthState>(
+             builder: (context, state) {
+              return state.map(
+                ///Error case change it
+                  initialState: (_)=> const Text (''),
+                  authenticated: (e)=> Text (e.user.email.toString()),
+                  unAuthenticated:(_)=>const Text ('not registered'),
+              );
+         },
+         ),
             SizedBox(
               height: 200,
               width: 400,
@@ -133,7 +145,7 @@ class _HomePageState extends State<HomePage> {
                     /// delete this
                     categoryError: (_) => ListView(
                       scrollDirection: Axis.horizontal,
-                      children: [
+                      children: const [
                         ErrorCards(
                           category: 'clothes',
                         ),
@@ -158,8 +170,8 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ),
-            const SizedBox(
-              height: 30,
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.003,
             ),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 15.0),
@@ -173,47 +185,47 @@ class _HomePageState extends State<HomePage> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  // Text(
-                  //   "see more",
-                  //   style: TextStyle(color: primaryColor),
-                  // ),
                 ],
               ),
             ),
-            const SizedBox(
-              height: 20,
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.001,
             ),
-            Center(
-              child: BlocBuilder<ProductsCubit, ProductState>(
-                builder: (context, state) {
-                  return state.map(
-                      loading: (_) => const SizedBox(
-                          height: 250,
-                          child: Center(child: CircularProgressIndicator())),
-                      productLoaded: (state) {
-                        return SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.6,
-                            child: GridView.builder(
-                              itemCount: state.allData.length,
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                crossAxisSpacing: 1,
-                                mainAxisSpacing: 1,
-                                childAspectRatio: 1 / 1.5,
-                              ),
-                              itemBuilder: (BuildContext context, int index) {
-                                return GridCard(state.allData[index]);
-                              },
-                            ));
-                      },
-                      productError: (_) => const SizedBox(
-                          height: 250, child: Center(child: Text('Error'))));
-                },
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Center(
+                child: BlocBuilder<ProductsCubit, ProductState>(
+                  builder: (context, state) {
+                    return state.map(
+                        loading: (_) => const SizedBox(
+                            height: 250,
+                            child: Center(child: CircularProgressIndicator())),
+                        productLoaded: (state) {
+                          return Container(
+                                      decoration: BoxDecoration(
+                                          border: Border.all(color: secondaryColor)),
+                            child: SizedBox(
+                                height: MediaQuery.of(context).size.height * 0.6,
+                                child: GridView.builder(
+                                  itemCount: state.allData.length,
+                                  gridDelegate:
+                                   const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    crossAxisSpacing: 1,
+                                    mainAxisSpacing: 1,
+                                    childAspectRatio: 1 / 2,
+                                  ),
+                                  itemBuilder: (BuildContext context, int index) {
+                                    return GridCard(state.allData[index]);
+                                  },
+                                )),
+                          );
+                        },
+                        productError: (_) => const SizedBox(
+                            height: 250, child: Center(child: Text('Error'))));
+                  },
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 20,
             ),
           ],
         ),
@@ -304,11 +316,11 @@ class _HomePageState extends State<HomePage> {
 class TestCards extends StatelessWidget {
   final String data;
 
-  const TestCards({required this.data});
+  const TestCards({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 200,
       height: 300,
       child: Column(
@@ -319,7 +331,7 @@ class TestCards extends StatelessWidget {
 }
 
 class ErrorCards extends StatelessWidget {
-  ErrorCards({required this.category});
+  const ErrorCards({super.key, required this.category});
 
   final String category;
 

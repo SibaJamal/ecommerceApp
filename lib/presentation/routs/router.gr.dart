@@ -9,8 +9,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i11;
-import 'package:e_commerce/domain/core/category.dart' as _i12;
-import 'package:e_commerce/domain/products/product.dart' as _i14;
+import 'package:e_commerce/domain/products/product.dart' as _i13;
 import 'package:e_commerce/presentation/auth/sign_in_page.dart' as _i8;
 import 'package:e_commerce/presentation/auth/sign_up_page.dart' as _i9;
 import 'package:e_commerce/presentation/cart/cart_page.dart' as _i1;
@@ -21,7 +20,7 @@ import 'package:e_commerce/presentation/home/home_page.dart' as _i3;
 import 'package:e_commerce/presentation/profile/account_page.dart' as _i6;
 import 'package:e_commerce/presentation/search/search_page.dart' as _i7;
 import 'package:e_commerce/presentation/splash/spalsh_page.dart' as _i10;
-import 'package:flutter/material.dart' as _i13;
+import 'package:flutter/material.dart' as _i12;
 
 abstract class $AppRouter extends _i11.RootStackRouter {
   $AppRouter({super.navigatorKey});
@@ -38,7 +37,10 @@ abstract class $AppRouter extends _i11.RootStackRouter {
       final args = routeData.argsAs<CategoryRouteArgs>();
       return _i11.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i2.CategoryPage(category: args.category),
+        child: _i2.CategoryPage(
+          key: args.key,
+          category: args.category,
+        ),
       );
     },
     HomeRoute.name: (routeData) {
@@ -114,11 +116,15 @@ class CartRoute extends _i11.PageRouteInfo<void> {
 /// [_i2.CategoryPage]
 class CategoryRoute extends _i11.PageRouteInfo<CategoryRouteArgs> {
   CategoryRoute({
-    required _i12.MyCategory category,
+    _i12.Key? key,
+    required String category,
     List<_i11.PageRouteInfo>? children,
   }) : super(
           CategoryRoute.name,
-          args: CategoryRouteArgs(category: category),
+          args: CategoryRouteArgs(
+            key: key,
+            category: category,
+          ),
           initialChildren: children,
         );
 
@@ -129,13 +135,18 @@ class CategoryRoute extends _i11.PageRouteInfo<CategoryRouteArgs> {
 }
 
 class CategoryRouteArgs {
-  const CategoryRouteArgs({required this.category});
+  const CategoryRouteArgs({
+    this.key,
+    required this.category,
+  });
 
-  final _i12.MyCategory category;
+  final _i12.Key? key;
+
+  final String category;
 
   @override
   String toString() {
-    return 'CategoryRouteArgs{category: $category}';
+    return 'CategoryRouteArgs{key: $key, category: $category}';
   }
 }
 
@@ -171,8 +182,8 @@ class MainRoute extends _i11.PageRouteInfo<void> {
 /// [_i5.ProductPage]
 class ProductRoute extends _i11.PageRouteInfo<ProductRouteArgs> {
   ProductRoute({
-    _i13.Key? key,
-    required _i14.Product product,
+    _i12.Key? key,
+    required _i13.Product product,
     List<_i11.PageRouteInfo>? children,
   }) : super(
           ProductRoute.name,
@@ -195,9 +206,9 @@ class ProductRouteArgs {
     required this.product,
   });
 
-  final _i13.Key? key;
+  final _i12.Key? key;
 
-  final _i14.Product product;
+  final _i13.Product product;
 
   @override
   String toString() {

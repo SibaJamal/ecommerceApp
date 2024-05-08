@@ -1,9 +1,7 @@
 import 'package:auto_route/annotations.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../application/auth/auth_bloc.dart';
-import '../../application/cart/cart_bloc.dart';
 import '../cart/cart_page.dart';
 import '../home/home_page.dart';
 import '../profile/account_page.dart';

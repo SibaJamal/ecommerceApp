@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:meta/meta.dart';
 import 'package:e_commerce/domain/auth/i_auth_facade.dart';
 import 'package:injectable/injectable.dart';
 part 'auth_event.dart';
@@ -18,8 +17,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await event.map(
         authCheckedRequested: (e) async {
           final optionUser = await authFacade.getSignedInUser();
-          optionUser.fold(() => emit(const AuthState.unAuthenticated()),
-              (e) => emit(AuthState.authenticated(user: e)));
+          optionUser.fold(
+                  () {emit(const AuthState.unAuthenticated());
+                    print('*****************siba****************');
+                  print(optionUser);
+                  print('*****************siba****************');},
+                  (e) {emit(AuthState.authenticated(user: e));
+                  print('*****************siba****************');
+                  print(e.displayName);
+                  print('*****************siba****************');
+                  }
+          );
         },
         signedOut: (e) async {
           await authFacade.signOut();
@@ -29,3 +37,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     });
   }
 }
+
+
+
+
+
+
+

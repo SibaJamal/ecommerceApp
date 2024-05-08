@@ -112,9 +112,9 @@ class _CreateProductPostState extends State<CreateProductPost> {
                         /// todo
                         height: 100,
                       ),
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.start,
-                        children: const [
+                        children: [
                           Padding(
                             padding: EdgeInsets.all(15.0),
                             child: Text(
@@ -172,7 +172,7 @@ class _CreateProductPostState extends State<CreateProductPost> {
 class TestCards extends StatelessWidget {
   final String data;
 
-  const TestCards({required this.data});
+  const TestCards({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {

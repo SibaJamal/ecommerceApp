@@ -5,16 +5,15 @@ import 'package:e_commerce/presentation/routs/router.gr.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../domain/core/category.dart';
 
 class Cards extends StatelessWidget {
-  final MyCategory category;
-  Cards({required this.category});
+  final String category;
+  const Cards({super.key, required this.category});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context)  => CategoryProductsCubit(name: category.name),
+      create: (BuildContext context)  => CategoryProductsCubit(name: category),
       child: GestureDetector(
         onTap: () {
           context.router.push(CategoryRoute(category:category));
@@ -34,7 +33,7 @@ class Cards extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(1.0),
               child: Center(
-                child: Text(category.name,
+                child: Text(category,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       color: primaryColor,

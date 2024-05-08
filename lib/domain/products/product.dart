@@ -2,12 +2,12 @@ class Product {
   late String title;
   late String description;
   late int quantity;
-  late String imagesUrl;
-  late double price;
+  late String imageUrl;
+  late num price;
   late int id;
   late String userName;
   late String userEmail;
-  late String createdAt;
+  // late String createdAt;
   late String category;
   // late String updatedAt;
   // late String address;
@@ -17,12 +17,12 @@ class Product {
     this.title,
     this.description,
     this.quantity,
-    this.imagesUrl,
+    this.imageUrl,
     this.price,
     this.id,
     this.userEmail,
     this.userName,
-    this.createdAt,
+    // this.createdAt,
     this.category,
     // this.updatedAt
       // this.address,
@@ -34,7 +34,7 @@ class Product {
     title = json ['title'];
     description = json ['description'];
     category = json ['category'];
-    imagesUrl = json ['image'];
+    imageUrl = json ['image'];
     quantity = json ['rating']['count'];
     price = json['price'];
     userName = 'user Name';

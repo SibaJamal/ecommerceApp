@@ -1,7 +1,6 @@
 import 'package:auto_route/annotations.dart';
 import 'package:e_commerce/application/cart/cart_bloc.dart';
 import 'package:e_commerce/presentation/cart/widgets/list_card.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../constants.dart';
@@ -40,7 +39,7 @@ class CartPage extends StatelessWidget {
                 } else {
                   return Padding(
                     padding: const EdgeInsets.all(3.0),
-                    child: Container(
+                    child: SizedBox(
                       // decoration: BoxDecoration(border: Border.all(color: primaryColor),borderRadius: BorderRadius.circular(25)),
                       height: MediaQuery.of(context).size.height * 0.65,
                       child: Padding(

@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:e_commerce/domain/products/fetch_data_failure.dart';
 import 'package:injectable/injectable.dart';
-import 'package:meta/meta.dart';
 import '../../infrastructure/products/products_data_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'products_state.dart';
