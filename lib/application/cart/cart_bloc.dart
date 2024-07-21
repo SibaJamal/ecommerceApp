@@ -27,11 +27,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
   // void _addTo(AddToCart event, Emitter<CartState> emit) {
   //   state.items.add(event.product);
-  //   print('FuckFuckFuckFuckFuckFuckFuckFuckFuckFuckFuck');
   // }
   //
   // void _removeFrom(RemoveFromCart event, Emitter<CartState> emit) {
   //   state.items.remove(event.product);
-  //   print('FuckFuckFuckFuckFuckFuckFuckFuckFuckFuckFuck');
   // }
 }
